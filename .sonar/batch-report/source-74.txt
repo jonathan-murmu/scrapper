@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block home-marquee %}
+<div class="row search-form">
+	<div class = "col-sm-12">
+		<div class="row"><h3 class="text-center">What would you like to search?</h3>
+		</div><br>
+		<!-- form for searching -->
+		<form action="{% url 'scrap' %}" id="scrap_form" method='post'>{% csrf_token %}
+			<!-- search field -->
+			<div class="form-group col-sm-8 col-sm-offset-2">
+				{{ form.non_field_errors }}
+				<!-- displaying the errors if any -->
+				{% if form.search.errors %}
+					<div class="has-error has-feedback">
+						{{ form.search }}
+						<span class="help-inline text-danger">
+		                    {% for error in  form.search_item.errors %}{{ error }}{% endfor %}
+		                </span>
+		                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				{% else %}
+					<div class="controls has-feedback">
+						<!-- textfield with a glyphicon -->
+ 						{{form.search}}
+ 						<span class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
+				{% endif %}					
+			</div>
+			<!-- site choice-->
+			<div class="form-group col-sm-6 col-sm-offset-2">
+				<!-- displaying errors if any -->
+				{% if form.site_choice.errors %}
+				<!-- label for the radio button -->
+					{{ form.site_choice.label_tag }}
+					<div class="col-sm-11 col-sm-offset-1">
+						{% for field in  form.site_choice %}<div>{{ field }}</div>{% endfor %}
+						<span class="help-inline text-danger">
+			                {% for error in  form.site_choice.errors %}{{ error }}{% endfor %}
+			            </span>
+					</div>
+				<!-- otherwise just display the radio button -->
+				{% else %}
+					<!-- label for the radio button -->
+					{{ form.site_choice.label_tag }}
+					<div class="col-sm-11 col-sm-offset-1">
+						<!-- radio button -->
+						{% for field in  form.site_choice %}<div>{{ field }}</div>{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<!-- scrap button -->
+			<div class="form-group col-sm-2 text-center">
+				<button type="submit" id="scrap_submit" name="scrap_submit" class="btn btn-primary" >Scrap</button>
+			</div>
+		</form>
+	</div>
+
+	<!-- result content -->
+	<div id="scrap_result_area" class="col-sm-12">
+	</div>
+	
+	<!-- loading image -->
+	<div class="col-sm-12">
+		<div class="load_div col-sm-12" id="load_div"><div class="text-center"><img class="loading_img" width="140px" height="140px" src="{% static 'images/loader3.gif' %}"></div></div>
+	</div>
+
+</div> <!-- / row seach-form -->
+
+{% endblock%}

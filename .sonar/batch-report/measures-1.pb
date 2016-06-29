@@ -1,0 +1,1 @@
+ò2Û[{"key":"py-sonar-way-49175","language":"py","name":"Sonar way","rulesUpdatedAt":"2016-06-26T12:57:29+0000"},{"key":"web-sonar-way-79138","language":"web","name":"Sonar way","rulesUpdatedAt":"2016-06-26T12:57:27+0000"}]:quality_profiles

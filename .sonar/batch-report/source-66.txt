@@ -1,0 +1,8 @@
+<!-- footer -->
+<nav id="footer">
+  <div class="container">
+    <div class="pull-left fnav">
+      <p>ALL RIGHTS RESERVED. COPYRIGHT © 2016. </p>
+    </div>
+  </div>
+</nav>

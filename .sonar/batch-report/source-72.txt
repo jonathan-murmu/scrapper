@@ -1,0 +1,250 @@
+{% load static %}
+<html>
+	<head>
+		<!-- content inside the head tag of an html page -->
+		<meta charset="UTF-8">
+		<!--tell the IE to use the latest rendering engine-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<!--set the page width to size of the device and zoom level to 1-->
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>{{title}}</title>
+		<!-- stylesheet -->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">	
+		<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/scrolling-nav.css' %}">
+
+	</head>
+	<body>
+		<!-- naviagation bar -->
+		{% include 'navbar_dashboard.html' %}
+		<!-- profile page content -->
+		<div class="container-fluid profile-background">
+		    <div class="row profile">
+				<div class="col-md-3">
+					<div class="profile-sidebar">
+						<!-- sidebar userpic -->
+						<div class="profile-userpic">
+							<img src="{% get_static_prefix %}{{user.userdetail.image}}" class="img-responsive" alt="Image not found ">
+						</div>
+
+						<!-- sidebar user title -->
+						<div class="profile-usertitle">
+							<div class="profile-usertitle-name">
+								{{user.first_name}} {{user.last_name}}
+							</div>
+							<div class="profile-usertitle-job email">
+								{{user.email}}
+							</div>
+						</div>
+
+						<!-- sidebar user menu, displaying link for profile, edit profile and logout -->
+						<div class="profile-usermenu">
+							<ul class="nav">
+								<!-- displaying the profile -->
+								<li class="active">
+									<a href="{% url 'profile' %}">
+									<i class="glyphicon glyphicon-home"></i>
+									Overview </a>
+								</li>
+								<!-- link for editing the profile -->
+								<li>
+									<a href="{% url 'edit_profile' %}">
+									<i class="glyphicon glyphicon-user"></i>
+									Edit Profile </a>
+								</li>
+								<!-- link for logging out -->
+								<li>
+									<a href="{% url 'logout' %}">
+									<i class="glyphicon glyphicon-log-out"></i>
+									Log out </a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div> <!--col-md-3-->
+
+				<!-- profile content, displaying all the fields for viewing the profile -->
+				<div class="col-md-9">
+		            <div class="profile-content">
+		            	<!-- heading -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="page-header">
+									<h1>
+										Profile
+									</h1>
+								</div>
+							</div>
+						</div>
+						<!-- personal information -->
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table borderless">
+									<!-- name -->
+									<tr>
+										<th class="col-md-3"><p>Personal Information</p></th>
+										<td class="col-md-3"><p>Name:</p></td>
+										<td class="col-md-6"><P>{{user.first_name}} {{user.last_name}}</P></td>
+									</tr>
+									
+									<!-- gender -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Gender:</p></td>
+										<td class="col-md-6"><P>{{user.userdetail.get_gender_display}}</P></td>
+									</tr>
+
+									<!-- date of birth -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Date of birth:</p></td>
+										<td class="col-md-6"><P>{{user.userdetail.date_of_birth}}</P></td>
+									</tr>
+
+									<!-- marital status -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Marital status:</p></td>
+										<td class="col-md-6"><P>{{user.userdetail.get_marital_display}}</P></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<!-- contact detail -->
+						<div class="page-header"></div>						
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table borderless">
+									<!-- email -->
+									<tr>
+										<th class="col-md-3"><p>Contact Details</p></th>
+										<td class="col-md-3"><p>Email :</p></td>
+										<td class="col-md-6">{{user.email}}</td>
+									</tr>
+
+									<!-- phone -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Phone :</p></td>
+										<td class="col-md-6">{{user.userdetail.phone}}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<!-- address -->
+						<div class="page-header"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table borderless">
+									<!-- address line -->
+									<tr>
+										<th class="col-md-3"><p>Address</p></th>
+										<td class="col-md-3"><p>Address line:</p></td>
+										<td class="col-md-6"><p>{{user.userdetail.address}}</p></td>
+									</tr>
+
+									<!-- street -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Street :</p></td>
+										<td class="col-md-6"><p>{{user.userdetail.street}}</p></td>
+									</tr>
+
+									<!-- city -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>City :</p></td>
+										<td class="col-md-6"><p>{{user.userdetail.city}}</p></td>
+									</tr>
+
+									<!-- state -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>State :</p></td>
+										<td class="col-md-6"><p>{{user.userdetail.state}}</p></td>
+									</tr>
+
+									<!-- zip coe -->
+									<tr>
+										<td class="col-md-3"></td>
+										<td class="col-md-3"><p>Zip code :</p></td>
+										<td class="col-md-6"><p>{{user.userdetail.zip_code}}</p></td>
+									</tr>
+								</table>
+							</div>
+							
+	
+						</div>
+						<!-- extra note -->
+						<div class="page-header"></div>
+						<div class="row">
+							<!-- displaying the extra note -->
+							<div class="col-md-12">
+								<table class="table borderless">
+									<!-- extra note -->
+									<tr>
+										<th class="col-md-3"><p>Extra Note</p></th>
+										<td class="col-md-9"><p>{{user.userdetail.extra_note}}</p></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<!-- preffered communication -->
+						<div class="page-header"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- displaying all the prefered communications for the user in unordered list -->
+								<table class="table borderless">
+									<tr>
+										<th class="col-md-3"><p>Preferred communication</p></th>
+										<td class="col-md-3"></td>
+										<td class="col-md-6"></td>
+									</tr>
+
+									<!-- mail -->
+									<tr>
+										<th class="col-md-3"></th>
+										<td class="col-md-3"><p>Mail :</p></td>
+										<td class="col-md-6">{% if user.userdetail.mail %}<span class="glyphicon glyphicon-ok"></span>{% endif%}</td>
+									</tr>
+
+									<!-- message -->
+									<tr>
+										<td class="col-md-3"><p></p></td>
+										<td class="col-md-3"><p>Message :</p></td>
+										<td class="col-md-6"><P>{% if user.userdetail.message %}<span class="glyphicon glyphicon-ok"></span>{% endif%}</P></td>
+									</tr>
+
+									<!-- phone call -->
+									<tr>
+										<td class="col-md-3"><p></p></td>
+										<td class="col-md-3"><p>Phone call:</p></td>
+										<td class="col-md-6"><P>{% if user.userdetail.phonecall %}<span class="glyphicon glyphicon-ok"></span>{% endif%}</P></td>
+									</tr>
+
+									<!-- other -->
+									<tr>
+										<td class="col-md-3"><p></p></td>
+										<td class="col-md-3"><p>Other:</p></td>
+										<td class="col-md-6"><P>{% if user.userdetail.other %}<span class="glyphicon glyphicon-ok"></span>{% endif%}</P></td>
+									</tr>
+								</table>
+																
+							</div>
+						</div>							
+		            </div> 
+				</div>
+			</div> <!--row profile-->
+		</div>	
+		
+		<!-- footer -->
+		{% include 'footer.html'%}
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<!-- Scrolling Nav JavaScript -->
+	    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+	    <script src="{% static 'js/scrolling-nav.js' %}"></script>
+	</body>
+</html>

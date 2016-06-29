@@ -1,0 +1,64 @@
+{% extends 'base_home.html' %}
+{% block home-marquee %}
+<div class="row signup-form">
+	<!-- displaying message on successfull signup -->
+	{% if message_success %}
+		<div class="col-sm-offset-3 col-md-6 min-height-fix">			
+			<div class="alert alert-success text-center">
+	            <a class="close" href="#" data-dismiss="alert">×</a>
+	            <strong>Registered Successfully!</strong>
+	                {{ message_success }}
+	        </div>			
+		</div>
+	{% else%}
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<!-- display success message when successfully registered -->			
+			<form class="form" action="{% url 'signup' %}" method="post">{% csrf_token %}
+				{{ form.non_field_errors }}
+			   <!--  <fieldset> -->
+			        <legend class="page-header">Create An Account</legend>
+			        <!-- displaying error messages -->
+	                {% for message in messages %}
+	                    {% if 'error' in message.tags %}
+	                        <div class="alert alert-danger">
+	                            <a class="close" href="#" data-dismiss="alert">×</a>
+	                            <strong>Error!</strong>
+	                                {{ message }}
+	                        </div>
+	                    {% endif %}
+	                {% endfor %}
+			        {% for field in form %}
+			        	<!-- displaying errors if any -->
+			            {% if field.errors %}
+			                <div class="control-group has-error has-feedback">
+			                    <label class="control-label">{{ field.label }}*</label> 
+			                    <div class="controls has-error has-feedback">{{ field }}
+			                        <span class="help-inline text-danger">
+			                            {% for error in  field.errors %}{{ error }}{% endfor %}
+			                        </span>
+			                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			                    </div>
+			                </div>
+			            <!-- otherwise display the field without errors -->
+			            {% else %}
+			                <div class="control-group">
+			                    <label class="control-label">{{ field.label }}*</label> 
+			                    <div class="controls">{{ field }}
+			                        {% if field.help_text %}
+			                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+			                        {% endif %}
+			                    </div>
+			                </div>
+			            {% endif %}
+			        {% endfor %}
+			    <!-- signup button -->
+			    <div class="form-actions">
+			        <button type="submit" class="btn btn-warning" >Submit</button>
+			    </div>
+			</form>
+		</div>		
+		<div class="col-md-4"></div>	
+	{% endif %}	
+</div>
+{% endblock %}

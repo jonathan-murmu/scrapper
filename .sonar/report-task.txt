@@ -1,0 +1,5 @@
+projectKey=scrapper_py
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/scrapper_py
+ceTaskId=AVWM9H75TFSwDR3SkDYU
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVWM9H75TFSwDR3SkDYU
